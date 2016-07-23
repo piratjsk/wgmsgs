@@ -19,12 +19,12 @@ public final class Wgmsgs extends JavaPlugin {
     void setMsgs() {
         this.reloadConfig();
         final String denyMessage  = ChatColor.translateAlternateColorCodes('&', this.getConfig().getString("deny-message"));
-        final String defaultEntry = ChatColor.translateAlternateColorCodes('&', this.getConfig().getString("entry-deny-message"));
-        final String defaultExit  = ChatColor.translateAlternateColorCodes('&', this.getConfig().getString("exit-deny-message"));
+        final String denyEntry = ChatColor.translateAlternateColorCodes('&', this.getConfig().getString("entry-deny-message"));
+        final String denyExit  = ChatColor.translateAlternateColorCodes('&', this.getConfig().getString("exit-deny-message"));
         try {
             this.setFinalStatic(DefaultFlag.class.getDeclaredField("DENY_MESSAGE"), new StringFlag("deny-message", denyMessage));
-            this.setFinalStatic(DefaultFlag.class.getField("ENTRY_DENY_MESSAGE"), new StringFlag("entry-deny-message", denyMessage));
-            this.setFinalStatic(DefaultFlag.class.getField("EXIT_DENY_MESSAGE"), new StringFlag("exit-deny-message", denyMessage));
+            this.setFinalStatic(DefaultFlag.class.getField("ENTRY_DENY_MESSAGE"), new StringFlag("entry-deny-message", denyEntry));
+            this.setFinalStatic(DefaultFlag.class.getField("EXIT_DENY_MESSAGE"), new StringFlag("exit-deny-message", denyExit));
         } catch (final Exception e) {
             e.printStackTrace();
         }
