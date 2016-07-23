@@ -1,0 +1,3 @@
+deny-message: "&c&lHey!&7 Sorry, but you can't %what% here."
+entry-deny-message: "&c&lHey!&7 You are not permitted to enter this area."
+exit-deny-message:  "&c&lHey!&7 You are not permitted to leave this area."

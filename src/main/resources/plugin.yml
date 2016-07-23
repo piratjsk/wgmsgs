@@ -1,0 +1,16 @@
+name: wgmsgs
+version: 1.0
+author: piratjsk
+
+main: net.piratjsk.wgmsgs.Wgmsgs
+depend: [WorldGuard]
+
+commands:
+  wgmsgs:
+    aliases: wgmsg
+    description: With 'reload' argument reloads plugin configuration.
+
+permissions:
+  wgmsgs.reload:
+    description: Allows to use 'wgmsgs reload' command.
+    default: op
