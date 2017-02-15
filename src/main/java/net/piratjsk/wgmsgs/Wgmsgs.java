@@ -28,6 +28,7 @@ public final class Wgmsgs extends JavaPlugin {
     @Override
     public void onEnable() {
         this.saveDefaultConfig();
+        this.setMsgs();
         this.getCommand("wgmsg").setExecutor(new WgmsgCommand(this));
         final SessionManager sessionManager = WGBukkit.getPlugin().getSessionManager();
         sessionManager.registerHandler(FarewellTitleFlag.FACTORY, null);
@@ -35,7 +36,6 @@ public final class Wgmsgs extends JavaPlugin {
     }
 
     void setMsgs() {
-        this.reloadConfig();
         final String denyMessage  = ChatColor.translateAlternateColorCodes('&', this.getConfig().getString("deny-message"));
         final String denyEntry = ChatColor.translateAlternateColorCodes('&', this.getConfig().getString("entry-deny-message"));
         final String denyExit  = ChatColor.translateAlternateColorCodes('&', this.getConfig().getString("exit-deny-message"));

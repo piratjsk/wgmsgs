@@ -16,6 +16,7 @@ final class WgmsgCommand implements CommandExecutor {
     @Override
     public boolean onCommand(final CommandSender sender, final Command cmd, final String label, final String[] args) {
         if (args.length>0 && args[0].equalsIgnoreCase("reload") && sender.hasPermission("wgmsgs.reload")) {
+            this.plugin.reloadConfig();
             this.plugin.setMsgs();
             sender.sendMessage(ChatColor.GRAY + "Reloaded!");
             return true;
