@@ -9,7 +9,7 @@ final class WgmsgCommand implements CommandExecutor {
 
     private final Wgmsgs plugin;
 
-    WgmsgCommand(Wgmsgs plugin) {
+    WgmsgCommand(final Wgmsgs plugin) {
         this.plugin = plugin;
     }
 

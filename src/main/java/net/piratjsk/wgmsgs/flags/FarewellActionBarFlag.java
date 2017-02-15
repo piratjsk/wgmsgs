@@ -20,14 +20,14 @@ public final class FarewellActionBarFlag extends Handler {
     public static final Factory FACTORY = new Factory();
     public static class Factory extends Handler.Factory<FarewellActionBarFlag> {
         @Override
-        public FarewellActionBarFlag create(Session session) {
+        public FarewellActionBarFlag create(final Session session) {
             return new FarewellActionBarFlag(session);
         }
     }
 
     private Set<String> lastMessageStack = Collections.emptySet();
 
-    public FarewellActionBarFlag(final Session session) {
+    FarewellActionBarFlag(final Session session) {
         super(session);
     }
 
@@ -37,11 +37,11 @@ public final class FarewellActionBarFlag extends Handler {
 
     @Override
     public boolean onCrossBoundary(final Player player, final Location from, final Location to, final ApplicableRegionSet toSet, final Set<ProtectedRegion> entered, final Set<ProtectedRegion> exited, final MoveType moveType) {
-        final Set<String> messages = getMessages(player, toSet);
+        final Set<String> messages = this.getMessages(player, toSet);
 
         if (!messages.isEmpty()) {
-            for (ProtectedRegion region : toSet) {
-                String message = region.getFlag(Wgmsgs.FAREWELL_ACTIONBAR_FLAG);
+            for (final ProtectedRegion region : toSet) {
+                final String message = region.getFlag(Wgmsgs.FAREWELL_ACTIONBAR_FLAG);
                 if (message != null) {
                     messages.add(message);
                 }
@@ -51,7 +51,7 @@ public final class FarewellActionBarFlag extends Handler {
         for (final String message : lastMessageStack) {
             if (!messages.contains(message)) {
                 String effective = CommandUtils.replaceColorMacros(message);
-                effective = getPlugin().replaceMacros(player, effective);
+                effective = this.getPlugin().replaceMacros(player, effective);
                 ActionBar.send(player,effective);
                 break;
             }

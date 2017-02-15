@@ -27,7 +27,7 @@ public class GreetingTitleFlag extends Handler {
 
     private Set<String> lastMessageStack = Collections.emptySet();
 
-    public GreetingTitleFlag(final Session session) {
+    GreetingTitleFlag(final Session session) {
         super(session);
     }
 
@@ -38,7 +38,7 @@ public class GreetingTitleFlag extends Handler {
         for (final String message : messages) {
             if (!lastMessageStack.contains(message)) {
                 String effective = CommandUtils.replaceColorMacros(message);
-                effective = getPlugin().replaceMacros(player, effective);
+                effective = this.getPlugin().replaceMacros(player, effective);
                 if (effective.contains("||")) {
                     final String[] title = effective.split("\\|\\|");
                     player.sendTitle(title[0],title[1],10,70,20);
@@ -52,8 +52,6 @@ public class GreetingTitleFlag extends Handler {
         lastMessageStack = Sets.newHashSet(messages);
 
         if (!lastMessageStack.isEmpty()) {
-            // Due to flag priorities, we have to collect the lower
-            // priority flag values separately
             for (final ProtectedRegion region : toSet) {
                 final String message = region.getFlag(Wgmsgs.GREETING_TITLE_FLAG);
                 if (message != null) {

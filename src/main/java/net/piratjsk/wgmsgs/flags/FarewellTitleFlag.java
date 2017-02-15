@@ -19,14 +19,14 @@ public final class FarewellTitleFlag extends Handler {
     public static final Factory FACTORY = new Factory();
     public static class Factory extends Handler.Factory<FarewellTitleFlag> {
         @Override
-        public FarewellTitleFlag create(Session session) {
+        public FarewellTitleFlag create(final Session session) {
             return new FarewellTitleFlag(session);
         }
     }
 
     private Set<String> lastMessageStack = Collections.emptySet();
 
-    public FarewellTitleFlag(final Session session) {
+    FarewellTitleFlag(final Session session) {
         super(session);
     }
 
@@ -36,11 +36,11 @@ public final class FarewellTitleFlag extends Handler {
 
     @Override
     public boolean onCrossBoundary(final Player player, final Location from, final Location to, final ApplicableRegionSet toSet, final Set<ProtectedRegion> entered, final Set<ProtectedRegion> exited, final MoveType moveType) {
-        final Set<String> messages = getMessages(player, toSet);
+        final Set<String> messages = this.getMessages(player, toSet);
 
         if (!messages.isEmpty()) {
-            for (ProtectedRegion region : toSet) {
-                String message = region.getFlag(Wgmsgs.FAREWELL_TITLE_FLAG);
+            for (final ProtectedRegion region : toSet) {
+                final String message = region.getFlag(Wgmsgs.FAREWELL_TITLE_FLAG);
                 if (message != null) {
                     messages.add(message);
                 }
@@ -50,7 +50,7 @@ public final class FarewellTitleFlag extends Handler {
         for (final String message : lastMessageStack) {
             if (!messages.contains(message)) {
                 String effective = CommandUtils.replaceColorMacros(message);
-                effective = getPlugin().replaceMacros(player, effective);
+                effective = this.getPlugin().replaceMacros(player, effective);
                 if (effective.contains("||")) {
                     final String[] title = effective.split("\\|\\|");
                     player.sendTitle(title[0],title[1],10,70,20);

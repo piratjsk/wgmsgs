@@ -28,18 +28,18 @@ public class GreetingActionBarFlag extends Handler {
 
     private Set<String> lastMessageStack = Collections.emptySet();
 
-    public GreetingActionBarFlag(final Session session) {
+    GreetingActionBarFlag(final Session session) {
         super(session);
     }
 
     @Override
     public boolean onCrossBoundary(final Player player, final Location from, final Location to, final ApplicableRegionSet toSet, final Set<ProtectedRegion> entered, final Set<ProtectedRegion> exited, final MoveType moveType) {
-        final Collection<String> messages = toSet.queryAllValues(getPlugin().wrapPlayer(player), Wgmsgs.GREETING_ACTIONBAR_FLAG);
+        final Collection<String> messages = toSet.queryAllValues(this.getPlugin().wrapPlayer(player), Wgmsgs.GREETING_ACTIONBAR_FLAG);
 
         for (final String message : messages) {
             if (!lastMessageStack.contains(message)) {
                 String effective = CommandUtils.replaceColorMacros(message);
-                effective = getPlugin().replaceMacros(player, effective);
+                effective = this.getPlugin().replaceMacros(player, effective);
                 ActionBar.send(player,effective);
                 break;
             }
@@ -48,8 +48,6 @@ public class GreetingActionBarFlag extends Handler {
         lastMessageStack = Sets.newHashSet(messages);
 
         if (!lastMessageStack.isEmpty()) {
-            // Due to flag priorities, we have to collect the lower
-            // priority flag values separately
             for (final ProtectedRegion region : toSet) {
                 final String message = region.getFlag(Wgmsgs.GREETING_ACTIONBAR_FLAG);
                 if (message != null) {
