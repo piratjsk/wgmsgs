@@ -1,5 +1,5 @@
 name: wgmsgs
-version: 1.0.1
+version: @version@
 author: piratjsk
 
 main: net.piratjsk.wgmsgs.Wgmsgs
