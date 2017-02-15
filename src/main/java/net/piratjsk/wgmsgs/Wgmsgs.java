@@ -5,7 +5,9 @@ import com.sk89q.worldguard.protection.flags.DefaultFlag;
 import com.sk89q.worldguard.protection.flags.StringFlag;
 import com.sk89q.worldguard.protection.flags.registry.FlagRegistry;
 import com.sk89q.worldguard.session.SessionManager;
+import net.piratjsk.wgmsgs.flags.FarewellActionBarFlag;
 import net.piratjsk.wgmsgs.flags.FarewellTitleFlag;
+import net.piratjsk.wgmsgs.flags.GreetingActionBarFlag;
 import net.piratjsk.wgmsgs.flags.GreetingTitleFlag;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -17,12 +19,16 @@ public final class Wgmsgs extends JavaPlugin {
 
     public static final StringFlag FAREWELL_TITLE_FLAG = new StringFlag("farewell-title");
     public static final StringFlag GREETING_TITLE_FLAG = new StringFlag("greeting-title");
+    public static final StringFlag FAREWELL_ACTIONBAR_FLAG = new StringFlag("farewell-actionbar");
+    public static final StringFlag GREETING_ACTIONBAR_FLAG = new StringFlag("greeting-actionbar");
 
     @Override
     public void onLoad() {
         final FlagRegistry registry = WGBukkit.getPlugin().getFlagRegistry();
         registry.register(FAREWELL_TITLE_FLAG);
         registry.register(GREETING_TITLE_FLAG);
+        registry.register(FAREWELL_ACTIONBAR_FLAG);
+        registry.register(GREETING_ACTIONBAR_FLAG);
     }
 
     @Override
@@ -33,6 +39,8 @@ public final class Wgmsgs extends JavaPlugin {
         final SessionManager sessionManager = WGBukkit.getPlugin().getSessionManager();
         sessionManager.registerHandler(FarewellTitleFlag.FACTORY, null);
         sessionManager.registerHandler(GreetingTitleFlag.FACTORY, null);
+        sessionManager.registerHandler(FarewellActionBarFlag.FACTORY, null);
+        sessionManager.registerHandler(GreetingActionBarFlag.FACTORY, null);
     }
 
     void setMsgs() {
